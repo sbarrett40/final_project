@@ -29,5 +29,39 @@ class Game{
     
   }
   
+  public void button(){
+    if(gameMode==0){
+      //back
+      fill(255);
+      strokeWeight(1);
+      rect(680,500,90,45);
+      fill(0);
+      text("back",700, 530);
+      
+      //reset
+      fill(255);
+      rect(680,430,90,45);
+      fill(0);
+      text("reset",700,460);
+    }
+    //if(gameMode==1){
+    //  //unless...
+    //  fill(255);
+    //  rect(width-106,height-47,80,30);
+    //  fill(0);
+    //  textSize(20);
+    //  text("Unless...",width-100,height-25);
+      
+    //}
+  }
+  
+  public void on(boolean bool){
+    bool=true;
+  }
+  
+  public void off(boolean bool){
+    bool=false;
+  }
+  
 
 }
