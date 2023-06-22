@@ -1,22 +1,12 @@
 //class Driver {
   Game myGame=new Game();
   CardMatch myCard=new CardMatch();
+  //String match0=""; String match1="";
   SeqOfSquares mySeq=new SeqOfSquares();
-  CardImage picTest = new CardImage();
+  //int clickedTot=0;
   int clicked=0;
   
-  void testCardMatch(){
-    myCard.screenBase();
-    //myCard.showCard();
-  }
   
-  void testSOS(){
-    //stub
-  }
-  
-  void testCardImage(){
-    picTest.test();
-  }
   
   void setup(){
     size(800,600);
@@ -24,9 +14,8 @@
   }
   
   void draw(){
-    testCardImage();
-    //displayChoice();
-    //testCardMatch();
+    displayChoice();
+    //myCard.timer();
   }
   
   void displayChoice(){
@@ -35,22 +24,23 @@
       myGame.homeScreen();
     }
     
-    
     //CardMatch
     else{
-      if(myGame.gameMode==0){ 
+      if(myGame.gameMode==0){
         fill(0);
-        testCardMatch();
-        if(clicked<3){
-          myCard.showCard();
+        //myCard.timer();
+        myCard.modes();
+        
+        if(clicked>0){
+          //myCard.modes();
         }
       }
-      
-      
+          
       //SOS
-      else{ //|| myGame.gameMode==1){
+      else{ 
         fill(255);
         rect(0,0,width,height);
+        mySeq.screenBase();
       }
      }
      
@@ -60,14 +50,46 @@
     
     //CardMatch
     if(myCard.inUse){
+      
       clicked++;
-      myCard.findCard(mouseX, mouseY);
-       //myCard.showCard();
+      if(clicked==1){
+        myCard.match0=myCard.which(mouseX,mouseY);
+        myCard.mode=1;
+      }
+      if(clicked==2){
+        myCard.match1=myCard.which(mouseX,mouseY);
+        myCard.mode=2;
+      }
+      if(clicked==3){
+        myCard.mode=3;
+        clicked=0;
+      }
+      
+      
+       
+      if(mouseX>680 && mouseX<770){
+        if(mouseY>430 && mouseY<475){
+          
+        }
+        if(mouseY>500 && mouseY<545){ //back button not working
+          myGame.gameMode=-1;
+          myCard.deactivate(myCard.inUse);
+          fill(255); rect(0,0,width,height);
+        }
+      }
+       
+       
+       
     }
     
     //SOS
-    if(myGame.gameMode==1){
-        
+    if(mySeq.inUse){
+      clicked++;
+      if (mouseX>width-106 && mouseX<width-26){
+        if(mouseY>height-47 && mouseY<height-17){
+          //stub
+        }
+      }
     }
     
     //CardMatch button
@@ -75,7 +97,7 @@
       if(mouseX>width/6 && mouseX<width/6+150 &&
          mouseY>3.5*height/5 && mouseY<3.5*height/5+75){
          myGame.gameMode=0;
-         myCard.activate();
+         myCard.screenBase();
          }
     
     //SOS button
@@ -85,15 +107,6 @@
          }
       }
     
-    ////CardMatch
-    //if(myGame.gameMode==0){
-    //   //myCard.findCard(mouseX, mouseY);
-    //}
-    
-    ////SOS
-    //if(myGame.gameMode==1){
-        
-    //}
     
   }
   
